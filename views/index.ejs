@@ -1,0 +1,19 @@
+
+<% include ../views/header %>
+  <script>
+    $(document).ready(function(){
+      $("div#welcome-content").fadeIn(3000);
+    });
+  </script>
+<div class="row" id="welcome-content" style="display:none">
+<div class="col col-md-8" style="padding-right:50px">
+	<h5 class="text-info">New user? Sign up here</h5>
+	<br>
+	<% include ../views/forms/signup%>
+</div>
+<div class="col col-md-4">
+	<h5 class="text-info">Existing user? Sign in here</h5>
+	<br>
+	<% include ../views/forms/signin%>
+</div>
+</div>

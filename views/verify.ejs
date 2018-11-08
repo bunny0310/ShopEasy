@@ -1,0 +1,22 @@
+<% include ../views/header %>
+<div class="row">
+	<div class="col col-md-6 mx-auto">
+	 <%if(err){ %>
+	<div class="alert alert-danger">
+		<strong>User not found!</strong>
+		<span> Please login.</span>
+	</div>
+	 <% } else if(alreadyVerified){ %>
+	<div class="alert alert-danger">
+		<strong>Hey <%= user.First_Name__c%></strong>
+		<br/><span>You are already verified. Please login.</span></div>
+	 <% }else{%>
+	  <div class="alert.alert-success">
+	   <strong> Thanks <%=user.First_Name__c%> for verifying your account. You are all set.</strong>
+	  </div>
+	  <%}%>
+		<%include ../views/forms/signin %>
+	</div>
+</div>
+
+

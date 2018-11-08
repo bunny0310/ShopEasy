@@ -1,0 +1,12 @@
+<% include ../views/header %>
+<div class="row">
+		<div class="col col-md-6 mx-auto">
+			<%if(typeof invalid_login == 'object' && invalid_login){ %>
+			<div class="alert alert-danger">
+				<strong>Username and/or password not found!</strong> Please try again.
+			</div>
+			<%}%>
+			<%include ../views/forms/signin %>
+		</div>
+	</div>
+</div>
