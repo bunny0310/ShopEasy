@@ -15,7 +15,7 @@
         <a class="nav-link" href="#">Home Decor</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" style="margin-right:50px">
+    <ul class="navbar-nav ml-auto" style="margin-right:70px">
       <% if(!(req.session && req.session.user)){ %>
       <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-user"></span> Sign Up</a></li>
       <li class="nav-item"><a class="nav-link" href="#"><span class="fa fa-lock"></span> Sign in</a></li>
@@ -26,7 +26,7 @@
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#"><span class="fa fa-shopping-cart"></span> Your cart</a>
-          <a class="dropdown-item" href="#"><span class="fa fa-edit"></span> Update informaton</a>
+          <a class="dropdown-item" href="/update_billing_info"><span class="fa fa-edit"></span> Update billing informaton</a>
           <a class="dropdown-item" href="#"><span class="fa fa-gear"></span> Settings</a>
         <form action="/logout" method="post"><button class="btn btn-basic"><span class="fa fa-sign-out"></span> Logout</button></form>
         </div>

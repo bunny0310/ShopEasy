@@ -1,5 +1,10 @@
 <% include ../views/header %>
-<div class="row">
+<script>
+$(document).ready(function(){
+	$("div#login-form").fadeIn(3200);
+});
+</script>
+<div class="row" id="login-form" style="display:none">
 		<div class="col col-md-6 mx-auto">
 			<%if(typeof invalid_login == 'object' && invalid_login){ %>
 			<div class="alert alert-danger">

@@ -8,6 +8,8 @@ var session=require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var flash=require('connect-flash');
+var isUser=require('./middleware/isUser');
+var isGuest=require('./middleware/isGuest');
 var app = express();
 app.use(function(req, res, next){
        res.locals.req = req;

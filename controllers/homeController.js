@@ -61,7 +61,9 @@ exports.loginAuth=function(req,res)
 	salesforce.sobject("user__c").select("*").where("Email__c='"+req.body.email+"'").execute(function(err,records){
 		if(records.length==1 && bcrypt.compareSync(req.body.pwd,records[0].Password__c))
 		{
+			sess.email=req.body.email;
 			sess.user=records[0];
+			if(!sess.user)console.log("err_set");
 			res.redirect('/');
 		}
 		else
@@ -78,5 +80,34 @@ exports.logout=function(req,res)
 		res.redirect('/login?task=logout');
 	}
 }
+exports.fetchBillingInfo=function(req,res){
+		salesforce.sobject("Address__c").find({'user__c':req.session.user.Id}).execute(function(err,records){
+			if(records.length==0)res.render('update_billing_info',{flag:false});
+			else {
+				req.session.addresses=records; res.render('update_billing_info',{flag:true, records:records});
+				}
+		});
+};
+exports.update_billing_info_form=function(req,res){
+if(req.body.val!=undefined)
+	res.render("address_form",{record_id:req.body.val, add:req.body.add});
+else
+	res.render("address_form",{add:req.body.add});	
+};
+exports.add_address=function(req,res)
+{
+	salesforce.sobject("Address__c").create({Address_1__c:req.body.address1,Address_2__c:req.body.address2,City__c:req.body.city,State__c:req.body.state,Country__c:req.body.country,Zip_Code__c:req.body.zipcode, user__c:req.session.user.Id},function(err,ret){
+		if(err)console.log(err);
+	});
+	res.redirect('/update_billing_info?created=success');
+};
+exports.update_address=function(req,res)
+{
+	salesforce.sobject("Address__c").find({Name:req.body.address_id}).update({Address_1__c:req.body.address1,Address_2__c:req.body.address2,City__c:req.body.city,State__c:req.body.state,Country__c:req.body.country,Zip_Code__c:req.body.Zip_Code__c, user__c:req.session.user.Id},function(err,ret){
+		if(err ||!ret.success){console.log(err+ret+"dd");res.redirect('/update_billing_info?updated=error');}
+		else {console.log("updated"); res.redirect('/update_billing_info?updated=success');}
+	});
+
+};
 
 

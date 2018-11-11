@@ -1,0 +1,64 @@
+			<% if(add==0){ %>
+				<form action="/update_address" method="post">
+					<input type="hidden" name="address_id" value="<%=req.session.addresses[req.body.val].Name%>">
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Address 1: </strong></span></div>
+				    <input class="form-control" type="text" placeholder="Address 1" name="address1" id="address1" value="<%=req.session.addresses[req.body.val].Address_1__c%>"/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Address 2: </strong></span></div>
+				    <input class="form-control" type="text" placeholder="Address 2" name="address2" id="address2" value="<%=req.session.addresses[req.body.val].Address_2__c%>"/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>City: </strong></span></div>
+				    <input class="form-control" type="text" placeholder="City" value="<%=req.session.addresses[req.body.val].City__c%>" name="city" id="city"/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>State: </strong></span></div>
+				    <input class="form-control" type="text" placeholder="State" name="state" id="state" value="<%=req.session.addresses[req.body.val].State__c%>"/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Country</strong></span></div>
+				    <input class="form-control" type="text" placeholder="Country" name="country" id="country"
+				    <input class="form-control" type="text" placeholder="Country" name="country" id="country" value="<%=req.session.addresses[req.body.val].Country__c%>"/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Zip Code</strong></span></div>
+				    <input class="form-control" type="text" placeholder="Zip Code" name="zipcode" id="zipcode" value="<%=req.session.addresses[req.body.val].Zip_Code__c%>"/>
+				  </div>
+				  <div class="form-group">
+				    <button class="btn btn-primary float-right">Update!</button>
+				  </div>
+				</form>
+			<%} else { %>
+
+				<form action="/add_address" method="post">
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Address 1: </strong></span></div>
+				    <input class="form-control" type="text" placeholder="Address 1" name="address1" id="address1" value=""/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Address 2: </strong></span></div>
+				    <input class="form-control" type="text" placeholder="Address 2" name="address2" id="address2" value=""/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>City: </strong></span></div>
+				    <input class="form-control" type="text" placeholder="City" value="" name="city" id="city"/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>State: </strong></span></div>
+				    <input class="form-control" type="text" placeholder="State" name="state" id="state"/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Country</strong></span></div>
+				    <input class="form-control" type="text" placeholder="Country" name="country" id="country"/>
+				  </div>
+				  <div class="input-group form-group input-group-lg"><br/>
+				    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Zip Code</strong></span></div>
+				    <input class="form-control" type="text" placeholder="Zip Code" name="zipcode" id="zipcode"/>
+				  </div>
+				  <div class="form-group">
+				    <button class="btn btn-primary float-right">Add!</button>
+				  </div>
+				</form>				
+			<% } %>
