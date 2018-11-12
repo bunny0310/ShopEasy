@@ -1,0 +1,80 @@
+<% include ../views/header %>
+<script>
+$(document).ready(function(){
+	$("div#update-form").fadeIn(2800);
+});
+</script>
+<div class="row" id="update-form" style="display:none">
+		<div class="col col-md-6 mx-auto">
+		<%if(!flag){%>
+			<div class="alert alert-warning"><strong>No addresses found!</strong> Please add a new address.</div>
+		<%}else{%>
+			<%if(req.query.created=='success'){%>
+				<div class="alert alert-success"><strong>Address added successfully!</strong></div>
+			<%}%>
+			<%if(req.query.updated=='success'){%>
+				<div class="alert alert-success"><strong>Address updated successfully!</strong></div>
+			<%}%>
+			<select id="select_addresses">
+			<% records.forEach(function(record){ %>
+			<option value="<%=record.Name-1%>"><%= record.Address_1__c %> </option>
+			<% }) %>
+
+			</select>
+			<button class="btn btn-info float-right" id="add_new_address">Add new address</button>
+		<br><br>
+		<script> 
+			$(document).ready(function(){
+				$("input#address1").val("<%=records[0].Address_1__c%>");
+				$("input#address2").val("<%=records[0].Address_2__c%>");
+				$("input#city").val("<%=records[0].City__c%>");
+				$("input#state").val("<%=records[0].State__c%>");
+				$("input#country").val("<%=records[0].Country__c%>");
+				$("input#zipcode").val("<%=records[0].Zip_Code__c%>");
+				$("select#select_addresses").change(function(){
+					$.post("/change_address",{val:$("select#select_addresses").val(), add:0},function(data,status){
+						$("div#update_form").html(data);
+					});
+				});
+			$("button#add_new_address").click(function(){
+					$.post("/change_address",{add:1},function(data,status){
+						$("div#update_form").html(data);
+				});				
+			});
+		});
+		</script>
+		<div id="update_form">
+			<form action="/update_address" method="post">
+			<input type="hidden" name="address_id" value="<%=req.session.addresses[0].Name%>">
+			  <div class="input-group form-group input-group-lg"><br/>
+			    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Address 1: </strong></span></div>
+			    <input class="form-control" type="text" placeholder="Address 1" name="address1" id="address1"/>
+			  </div>
+			  <div class="input-group form-group input-group-lg"><br/>
+			    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Address 2: </strong></span></div>
+			    <input class="form-control" type="text" placeholder="Address 2" name="address2" id="address2"/>
+			  </div>
+			  <div class="input-group form-group input-group-lg"><br/>
+			    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>City: </strong></span></div>
+			    <input class="form-control" type="text" placeholder="City" name="city" id="city"/>
+			  </div>
+			  <div class="input-group form-group input-group-lg"><br/>
+			    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>State: </strong></span></div>
+			    <input class="form-control" type="text" placeholder="State" name="state" id="state"/>
+			  </div>
+			  <div class="input-group form-group input-group-lg"><br/>
+			    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Country</strong></span></div>
+			    <input class="form-control" type="text" placeholder="Country" name="country" id="country"/>
+			  </div>
+			  <div class="input-group form-group input-group-lg"><br/>
+			    <div class="input-group-prepend"><span class="input-group-text fa fa-user"> <strong>Zip Code</strong></span></div>
+			    <input class="form-control" type="text" placeholder="Zip Code" name="zipcode" id="zipcode"/>
+			  </div>
+			  <div class="form-group">
+			    <button class="btn btn-primary float-right">Update!</button>
+			  </div>
+			</form>
+		</div>
+	<%}%>
+	</div>
+</div>
