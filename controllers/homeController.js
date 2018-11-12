@@ -1,4 +1,4 @@
-var salesforce=require('salesforce');
+var salesforce=require('../custom_modules/salesforce');
 var rand = require("random-key");
 const { body,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
